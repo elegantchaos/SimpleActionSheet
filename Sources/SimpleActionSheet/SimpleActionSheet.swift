@@ -66,7 +66,7 @@ public struct SimpleActionSheetModifier: ViewModifier {
 }
 
 public extension View {
-    func simpleActionSheet(sheet: Binding<SimpleActionSheet?>) -> some View {
+    func simpleActionSheet(_ sheet: Binding<SimpleActionSheet?>) -> some View {
         self
             .modifier(SimpleActionSheetModifier(sheet: sheet))
     }
