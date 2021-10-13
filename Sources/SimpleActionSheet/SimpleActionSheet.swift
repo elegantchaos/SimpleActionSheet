@@ -7,12 +7,12 @@ import SwiftUI
 
 public struct SimpleActionSheet {
     let title: LocalizedStringKey
-    let message: LocalizedStringKey
+    let message: String
     var buttons: [Button]
 
-    public init(title: LocalizedStringKey, message: LocalizedStringKey, buttons: [SimpleActionSheet.Button]) {
+    public init(title: LocalizedStringKey, message: String, buttons: [SimpleActionSheet.Button]) {
         self.title = title
-        self.message = message
+        self.message = NSLocalizedString(message, comment: "")
         self.buttons = buttons
     }
 
@@ -54,11 +54,12 @@ public struct SimpleActionSheetModifier: ViewModifier {
     }
 
     public func body(content: Content) -> some View {
-        content
+        return content
             .actionSheet(isPresented: showSheet) {
-                ActionSheet(
+                let message = sheet!.message
+                return ActionSheet(
                     title: Text(sheet!.title),
-                    message: Text(sheet!.message),
+                    message: message.isEmpty ? nil : Text(message),
                     buttons: sheet!.sheetButtons
                 )
             }
